@@ -13,9 +13,9 @@ namespace Products.Application.Features.Commands.AddProduct
         public async Task<int> Handle(AddProductCommand request, CancellationToken cancellationToken)
         {
             var productEntity = _mapper.Map<Product>(request);
-           var order = await  _productRepository.AddAsync(productEntity);
+           var product = await  _productRepository.AddAsync(productEntity);
 
-            return order.Id;
+            return product.Id;
         }
     }
 }

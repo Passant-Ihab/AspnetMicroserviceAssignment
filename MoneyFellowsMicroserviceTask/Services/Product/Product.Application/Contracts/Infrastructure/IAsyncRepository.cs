@@ -41,13 +41,13 @@ namespace Products.Application.Contracts.Infrastructure
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task UpdateAsunc(T entity);
+        Task UpdateAsync(T entity);
 
         /// <summary>
         /// Deletes an entity
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task DeleteAsunc(int id);
+        Task DeleteAsync(int id);
     }
 }

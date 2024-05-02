@@ -22,7 +22,7 @@ namespace Products.Application.Features.Commands.UpdateProduct
 
             _mapper.Map(request, product, typeof(UpdateProductCommand), typeof(Product));
 
-            await _productRepository.UpdateAsunc(product);
+            await _productRepository.UpdateAsync(product);
 
             return Unit.Value;
         }
