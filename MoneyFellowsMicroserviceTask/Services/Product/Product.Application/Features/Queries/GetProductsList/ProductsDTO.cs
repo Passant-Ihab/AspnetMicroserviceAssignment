@@ -1,12 +1,9 @@
-﻿using Products.Core.Common;
-
-namespace Products.Core.Entities
+﻿namespace Products.Application.Features.Queries.GetProductsList
 {
-    /// <summary>
-    /// Product Model class Represents the product data
-    /// </summary>
-    public class Product : EntityBase
+    public class ProductsDTO
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -18,6 +15,5 @@ namespace Products.Core.Entities
         public decimal Price { get; set; }
 
         public decimal Rating { get; set; }
-
     }
 }

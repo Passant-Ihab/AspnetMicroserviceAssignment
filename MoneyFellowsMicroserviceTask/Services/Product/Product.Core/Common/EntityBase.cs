@@ -1,5 +1,8 @@
-﻿namespace Product.Core.Common
+﻿namespace Products.Core.Common
 {
+    /// <summary>
+    /// Entity base class contains the base properties that should exist on any entity
+    /// </summary>
     public class EntityBase
     {
         public int Id { get; protected set; }
