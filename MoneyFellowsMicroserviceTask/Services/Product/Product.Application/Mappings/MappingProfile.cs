@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Products.Application.Features.Commands.AddProduct;
 using Products.Application.Features.Queries.GetProductsList;
 using Products.Core.Entities;
 
@@ -9,6 +10,7 @@ namespace Products.Application.Mappings
         public MappingProfile()
         {
             CreateMap<Product, ProductsDTO>().ReverseMap();
+            CreateMap<Product, AddProductCommand>().ReverseMap();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace Products.Application.Contracts.Infrastructure
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<T> AddAsunc(T entity);
+        Task<T> AddAsync(T entity);
 
         /// <summary>
         /// Updates existing entity
