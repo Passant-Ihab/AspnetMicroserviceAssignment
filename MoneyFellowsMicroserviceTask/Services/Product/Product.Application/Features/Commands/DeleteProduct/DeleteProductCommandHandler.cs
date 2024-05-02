@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Products.Application.Contracts.Infrastructure;
+using Products.Application.Exceptions;
 
 namespace Products.Application.Features.Commands.DeleteProduct
 {
@@ -14,7 +15,7 @@ namespace Products.Application.Features.Commands.DeleteProduct
             var product = await _productRepository.GetByIdAsync(request.Id);
             if (product == null)
             {
-                //throw the exception
+                throw new EntityNotFoundException(nameof(product), request.Id);
             }
             await _productRepository.DeleteAsync(request.Id);
 

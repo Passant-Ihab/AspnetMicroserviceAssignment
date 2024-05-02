@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Products.Application.Contracts.Infrastructure;
+using Products.Application.Exceptions;
 using Products.Core.Entities;
 
 namespace Products.Application.Features.Commands.UpdateProduct
@@ -17,7 +18,7 @@ namespace Products.Application.Features.Commands.UpdateProduct
 
             if (product == null)
             {
-                //throw new NotFoundException(nameof(product), request.Id);
+                throw new EntityNotFoundException(nameof(product), request.Id);
             }
 
             _mapper.Map(request, product, typeof(UpdateProductCommand), typeof(Product));
