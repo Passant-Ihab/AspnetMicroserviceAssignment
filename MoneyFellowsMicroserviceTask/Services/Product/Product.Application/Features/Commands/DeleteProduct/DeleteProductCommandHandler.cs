@@ -6,11 +6,14 @@ using Products.Application.Exceptions;
 
 namespace Products.Application.Features.Commands.DeleteProduct
 {
+    /// <inheritdoc />
     public class DeleteProductCommandHandler(IProductRepository productRepository, IMapper mapper, ILogger<DeleteProductCommandHandler> logger) : IRequestHandler<DeleteProductCommand>
     {
         private readonly IProductRepository _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
         private readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         private readonly ILogger<DeleteProductCommandHandler> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+        /// <inheritdoc />
         public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetByIdAsync(request.Id);

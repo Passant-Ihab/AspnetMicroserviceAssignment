@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 
 namespace Products.Infrastructure.Persistence
 {
+    /// <summary>
+    /// Products DB context class
+    /// </summary>
+    /// <param name="options"></param>
     public class ProductContext(DbContextOptions<ProductContext> options) : DbContext(options)
     {
         public DbSet<Product> Products { get; set; }
 
-
+        /// <inheritdoc />
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var item in ChangeTracker.Entries<EntityBase>()) {

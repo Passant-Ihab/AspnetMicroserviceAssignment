@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Products.Application.Exceptions
 {
+    /// <summary>
+    /// Custom exception for the validation exceptions
+    /// </summary>
     public class ValidationException : ApplicationException
     {
         public ValidationException()

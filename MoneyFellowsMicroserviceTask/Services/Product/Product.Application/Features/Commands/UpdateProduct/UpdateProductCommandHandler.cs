@@ -8,6 +8,7 @@ using Products.Core.Entities;
 
 namespace Products.Application.Features.Commands.UpdateProduct
 {
+    /// <inheritdoc />
     public class UpdateProductCommandHandler(IProductRepository productRepository, IMapper mapper,ILogger<UpdateProductCommandHandler> logger ) : IRequestHandler<UpdateProductCommand>
     {
 
@@ -15,6 +16,7 @@ namespace Products.Application.Features.Commands.UpdateProduct
         private readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         private readonly ILogger<UpdateProductCommandHandler> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
+        /// <inheritdoc />
         public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetByIdAsync(request.Id);

@@ -8,8 +8,17 @@ using System.Reflection;
 
 namespace Products.Application
 {
+    /// <summary>
+    /// IO container class to register related services 
+    /// </summary>
     public static class ApplicationServiceRegistration
     {
+        /// <summary>
+        /// Extension method to be used to register related services 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MappingProfile));

@@ -3,8 +3,17 @@ using Products.Core.Entities;
 
 namespace Products.Infrastructure.Persistence
 {
+    /// <summary>
+    /// Seeding class to fill some data for the first run of the DB
+    /// </summary>
     public class ProductContextSeed
     {
+        /// <summary>
+        /// Inserts some initial data to the DB
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="logger"></param>
+        /// <returns></returns>
         public static async Task SeedAsync(ProductContext context, ILogger<ProductContextSeed> logger)
         {
             if(!context.Products.Any())
@@ -15,7 +24,10 @@ namespace Products.Infrastructure.Persistence
             }
         }
 
-
+        /// <summary>
+        /// Returns some fixed products data for the new database
+        /// </summary>
+        /// <returns></returns>
         private static IEnumerable<Product> GetProducts()
         {
             return

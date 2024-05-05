@@ -7,6 +7,9 @@ using Products.Core.Entities;
 
 namespace Products.Application.Mappings
 {
+    /// <summary>
+    /// Mapper profile to configure the models mappings
+    /// </summary>
     public class MappingProfile : Profile
     {
         public MappingProfile()

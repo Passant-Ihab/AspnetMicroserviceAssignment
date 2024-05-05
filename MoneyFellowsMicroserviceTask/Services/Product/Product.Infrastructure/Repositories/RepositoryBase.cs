@@ -6,10 +6,12 @@ using System.Linq.Expressions;
 
 namespace Products.Infrastructure.Repositories
 {
+    /// <inheritdoc />
     public class RepositoryBase<T>(ProductContext context) : IAsyncRepository<T> where T : EntityBase
     {
         protected readonly ProductContext _context = context ?? throw new ArgumentNullException(nameof(context));
 
+        /// <inheritdoc />
         public async Task<T> AddAsync(T entity)
         {
             _context.Set<T>().Add(entity);
@@ -18,6 +20,7 @@ namespace Products.Infrastructure.Repositories
 
         }
 
+        /// <inheritdoc />
         public async Task DeleteAsync(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id) ?? throw new KeyNotFoundException();
@@ -25,21 +28,25 @@ namespace Products.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        /// <inheritdoc />
         public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
         }
 
+        /// <inheritdoc />
         public async Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate)
         {
             return await _context.Set<T>().Where(predicate).ToListAsync();
         }
 
+        /// <inheritdoc />
         public async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);
         }
 
+        /// <inheritdoc />
         public async Task UpdateAsync(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;

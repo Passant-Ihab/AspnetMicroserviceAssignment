@@ -9,11 +9,18 @@ using System.Threading.Tasks;
 
 namespace Products.Application.Behaviours
 {
+    /// <summary>
+    /// Custom generic exception handler to handle the unknown exceptions
+    /// </summary>
+    /// <typeparam name="TRequest"></typeparam>
+    /// <typeparam name="TResponse"></typeparam>
+    /// <param name="logger"></param>
     public class UnHandledExceptionBehaviour<TRequest, TResponse>(ILogger<TRequest> logger) : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<TRequest> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
+        /// <inheritdoc />
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             try
