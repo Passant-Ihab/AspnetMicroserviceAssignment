@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Products.Application.Features.Commands.AddProduct;
 using Products.Application.Features.Commands.DeleteProduct;
 using Products.Application.Features.Commands.UpdateProduct;
@@ -9,11 +10,13 @@ using System.Net;
 
 namespace Products.API.Controllers
 {
+    [EnableRateLimiting("sliding")]
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ProductController(IMediator mediator) : ControllerBase
+    public class ProductController(IMediator mediator, ILogger<ProductController> logger) : ControllerBase
     {
         private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        private readonly ILogger<ProductController> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
         [HttpGet("{brandName}", Name = "GetProductsByBrandName")]
         [ProducesResponseType(typeof(IEnumerable<ProductsDTO>), (int)HttpStatusCode.OK)]
@@ -55,13 +58,13 @@ namespace Products.API.Controllers
         }
 
 
-        [HttpDelete( "{id}",  Name = "DeleteProduct")]
+        [HttpDelete("{id}", Name = "DeleteProduct")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesDefaultResponseType]
         public async Task<ActionResult> DeleteProduct(int id)
         {
-            var command = new DeleteProductCommand() { Id = id};
+            var command = new DeleteProductCommand() { Id = id };
             await _mediator.Send(command);
             return NoContent();
         }

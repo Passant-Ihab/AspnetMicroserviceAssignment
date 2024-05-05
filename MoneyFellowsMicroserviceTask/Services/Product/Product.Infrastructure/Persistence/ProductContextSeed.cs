@@ -1,15 +1,17 @@
-﻿using Products.Core.Entities;
+﻿using Microsoft.Extensions.Logging;
+using Products.Core.Entities;
 
 namespace Products.Infrastructure.Persistence
 {
     public class ProductContextSeed
     {
-        public static async Task SeedAsync(ProductContext context)
+        public static async Task SeedAsync(ProductContext context, ILogger<ProductContextSeed> logger)
         {
             if(!context.Products.Any())
             {
                 context.Products.AddRange(GetProducts());
                 await context.SaveChangesAsync();
+                logger.LogInformation("Seed database associated with context {DbContextName}", typeof(ProductContext).Name);
             }
         }
 
