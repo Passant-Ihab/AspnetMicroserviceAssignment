@@ -10,7 +10,7 @@ namespace Products.Application
 {
     public static class ApplicationServiceRegistration
     {
-        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
