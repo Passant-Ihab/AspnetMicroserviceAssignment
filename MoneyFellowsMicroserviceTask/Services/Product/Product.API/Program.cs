@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.RateLimiting;
 using Products.API.Extentions;
 using Products.Application;
@@ -32,6 +33,24 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
 
 });
 
+var apiVersioningBuilder = builder.Services.AddApiVersioning(o =>
+{
+    o.AssumeDefaultVersionWhenUnspecified = true;
+    o.DefaultApiVersion = new ApiVersion(1, 0);
+    o.ReportApiVersions = true;
+    o.ApiVersionReader = ApiVersionReader.Combine(
+        new QueryStringApiVersionReader("api-version"),
+        new HeaderApiVersionReader("X-Version"),
+        new MediaTypeApiVersionReader("ver"));
+});
+
+apiVersioningBuilder.AddApiExplorer(
+    options =>
+    {
+        options.GroupNameFormat = "'v'VVV";
+        options.SubstituteApiVersionInUrl = true;
+    });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -57,5 +76,7 @@ app.MapControllers();
 
 app.MigrateDatabase<ProductContext>((context, service) =>
 {
-    ProductContextSeed.SeedAsync(context).Wait();
+    var logger = service.GetService<ILogger<ProductContextSeed>>();
+
+    ProductContextSeed.SeedAsync(context, logger).Wait();
 }).Run();
