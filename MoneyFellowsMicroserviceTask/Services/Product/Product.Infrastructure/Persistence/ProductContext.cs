@@ -22,6 +22,8 @@ namespace Products.Infrastructure.Persistence
                     case EntityState.Added:
                         item.Entity.CreatedDate = DateTime.Now;
                         item.Entity.CreatedBy = "Passant";
+                        item.Entity.LastModifiedDate = DateTime.Now;
+                        item.Entity.LastModifiedBy = "Passant";
                         break;
                     case EntityState.Modified:
                         item.Entity.LastModifiedDate = DateTime.Now;

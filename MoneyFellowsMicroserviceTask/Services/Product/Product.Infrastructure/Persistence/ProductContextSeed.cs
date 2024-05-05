@@ -18,11 +18,11 @@ namespace Products.Infrastructure.Persistence
 
         private static IEnumerable<Product> GetProducts()
         {
-            return new List<Product>
-            {
-                new() { BrandName = "Nike", Description = "White Shoes", Owner = "Nike Store", Name = "Nike shoes", Price = 3547, Rating = 4 },
-                new() { BrandName = "Puma", Description = "Black T-Shirt", Owner = "Puma Store", Name = "Puma T-shirt", Price = 2235, Rating = 3 }
-            };
+            return
+            [
+                new() {  BrandName = "Nike", Description = "White Shoes", Owner = "Nike Store", Name = "Nike shoes", Price = 3547, Rating = 4, CreatedBy= "passant", CreatedDate = DateTime.Now, LastModifiedBy = "Passant", LastModifiedDate = DateTime.Now},
+                new() { BrandName = "Puma", Description = "Black T-Shirt", Owner = "Puma Store", Name = "Puma T-shirt", Price = 2235, Rating = 3, CreatedBy= "passant", CreatedDate = DateTime.Now, LastModifiedBy = "Passant", LastModifiedDate = DateTime.Now }
+            ];
         }
     }
 }

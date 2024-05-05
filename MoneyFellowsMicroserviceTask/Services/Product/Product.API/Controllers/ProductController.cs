@@ -18,7 +18,18 @@ namespace Products.API.Controllers
         private readonly IMediator _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         private readonly ILogger<ProductController> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-        [HttpGet("{brandName}", Name = "GetProductsByBrandName")]
+
+        [HttpGet(Name = "GetProductsList")]
+        [ProducesResponseType(typeof(IEnumerable<ProductsDTO>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<ProductsDTO>>> GetProductsList()
+        {
+            var query = new GetProductsListQuery();
+            var products = await _mediator.Send(query);
+            return Ok(products);
+        }
+
+
+        [HttpGet("brandName/{brandName}", Name = "GetProductsByBrandName")]
         [ProducesResponseType(typeof(IEnumerable<ProductsDTO>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<ProductsDTO>>> GetProductsByBrandName(string brandName)
         {
